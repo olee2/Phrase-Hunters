@@ -48,7 +48,8 @@ class Game:
 
         except ValueError as error:
 
-            print("\nInvalid characters in the phrase: {}. Please start over with a list of valid phrases.\n".format(error))
+            print("\nInvalid character(s) in the phrase: {} Please start over with a list of valid phrases.\n".format(error))
+            exit()
             
 
     def guessing(self):
