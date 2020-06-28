@@ -17,7 +17,7 @@ class Game:
             self.phrase_picker()
             
         else:
-            print("\nYou can only add a list of >= 5 phrases in string format. Example: ['valid list', 'of five', 'phrases in', 'string format', 'are required']. Try again.\n")
+            print("\nYou can only add a list of 5 or more phrases in string format. Letters (A-Z) and spaces only. \nExample: ['valid list', 'of five', 'phrases in', 'string format', 'are required']. Try again.\n")
             exit()
 
 
@@ -28,28 +28,30 @@ class Game:
         if not isinstance(self.phrases, list) or len(self.phrases) < 5:
             verified_list = False
 
-        for i in self.phrases:
-            if not isinstance(i, str):
+        for phrase in self.phrases:
+            if not isinstance(phrase, str):
                 verified_str = False
                 break
+
+        for phrase in self.phrases:
+            for char in phrase:
+                if char not in string.ascii_letters and char != " ":
+                    verified_str = False
+                    break
 
         return verified_list and verified_str
     
 
     def phrase_picker(self):
 
-        try:
-            self.phrase = []
-            
-            for i in list(random.choice(self.phrases)):
-                self.phrase.append(Character(i.lower()))
+        
+        self.phrase = []
+        
+        for i in list(random.choice(self.phrases)):
+            self.phrase.append(Character(i.lower()))
 
-            self.phrase = Phrase(self.phrase)
+        self.phrase = Phrase(self.phrase)
 
-        except ValueError as error:
-
-            print("\nInvalid character(s) in the phrase: {} Please start over with a list of valid phrases.\n".format(error))
-            exit()
             
 
     def guessing(self):
