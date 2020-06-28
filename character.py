@@ -16,9 +16,3 @@ class Character(str):
         elif self.was_guessed:
             return (self.original)
         return ("_")
-
-
-
-    
-        
-        
