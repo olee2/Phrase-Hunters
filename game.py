@@ -13,6 +13,7 @@ class Game:
         self.phrases = phrases
 
         if self.verification():
+            print("\n  Phrase Hunters\n \nOnly letters (A-Z)\n \n    Good Luck!")
             self.phrases = phrases
             self.phrase_picker()
             
@@ -64,7 +65,7 @@ class Game:
                         i.was_guessed = True
             else:
                 self.lives -= 1
-                print("\nWrong! You have {} lives remaining".format(self.lives))
+                print("\nWrong! You have {} out of 5 lives remaining".format(self.lives))
 
             self.phrase.dynamic()
             self.phrase.display()
