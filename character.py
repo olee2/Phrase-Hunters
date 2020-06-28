@@ -9,10 +9,6 @@ class Character(str):
             self.original = char
         else:
             raise ValueError("A character can only be one letter or a whitespace in string format.") 
-
-    def guess(self, guess):
-        if guess == self.original:
-            self.was_guessed = True
             
     def show(self):
         if self.original == " ":
