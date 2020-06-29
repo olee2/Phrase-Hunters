@@ -3,17 +3,23 @@ from character import Character
 class Phrase():
 
     def __init__(self, phrase):
+        self.phrase = []
+
+        for char in list(phrase):
+            self.phrase.append(Character(char.lower()))
         
-        self.phrase = phrase
 
     def __iter__(self):
         yield from self.phrase
 
         
     def check(self):
-        
         if "_" in self.dynamic_phrase:
-            return False       
+            return False
+
+        else:
+            for char in self.phrase:
+                char.was_guessed = False
 
         return True
 
