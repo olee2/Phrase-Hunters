@@ -1,21 +1,17 @@
 import random
 import string
 
-from character import Character
 from phrase import Phrase
 
 class Game:
 
     def __init__(self, phrases):
-
-        self.lives = 5
         self.play = True
         self.phrases = phrases
 
         if self.verification():
             print("\n  Phrase Hunters\n \nOnly letters (A-Z)\n \n    Good Luck!")
-            self.phrases = phrases
-            self.phrase_picker()
+            self.phrases = [Phrase(phrase) for phrase in phrases]
             
         else:
             print("\nYou can only add a list of 5 or more phrases in string format. Letters (A-Z) and spaces only. \nExample: ['valid list', 'of five', 'phrases in', 'string format', 'are required']. Try again.\n")
@@ -41,27 +37,15 @@ class Game:
                     break
 
         return verified_list and verified_str
-    
 
-    def phrase_picker(self):
-
-        
-        self.phrase = []
-        
-        for i in list(random.choice(self.phrases)):
-            self.phrase.append(Character(i.lower()))
-
-        self.phrase = Phrase(self.phrase)
-
-            
 
     def guessing(self):
         guess = input("\nPlease make a guess: ")
         
-        if guess in string.ascii_letters and len(guess) == 1:
-            if guess in self.phrase:
+        if guess.lower() in string.ascii_letters and len(guess) == 1:
+            if guess.lower() in self.phrase:
                 for i in self.phrase:
-                    if i == guess:
+                    if i == guess.lower():
                         i.was_guessed = True
             else:
                 self.lives -= 1
@@ -79,8 +63,6 @@ class Game:
         retry = input("\nWould you like to retry? [yay/nay] ")
         
         if retry.lower() == "yay":
-            self.lives = 5
-            self.phrase_picker()
             self.game_loop()
             
         elif retry.lower() == "nay":
@@ -93,6 +75,9 @@ class Game:
             
 
     def game_loop(self):
+        self.lives = 5
+        self.phrase = random.choice(self.phrases)
+        
         self.phrase.dynamic()
         self.phrase.display()
 
