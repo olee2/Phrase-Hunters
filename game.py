@@ -27,6 +27,7 @@ class Game:
         Verifies that the list that is passed to
         the game and the strings it contains is valid.
         """
+        
         verified_list = True
         verified_str = True
 
